@@ -1,0 +1,12 @@
+.pageheader {
+    height: 160px;
+    border-radius: 10px;
+    border-color:red;
+    border-style: solid;
+}
+.ageheader {
+    height: 90px;
+    border-radius: 10px;
+    border-color:red;
+    border-style: solid;
+}

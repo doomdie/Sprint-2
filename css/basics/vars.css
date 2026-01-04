@@ -1,0 +1,20 @@
+:root {
+
+    --clr-primary-white: #ffffff;
+    --clr-primary--1: #ededed;
+    --clr-primary-01: #cdcccc;
+    --clr-primary-base: #606060;
+    --clr-primary-05: #4F4E4E;
+    --clr-primary-02: #292929;
+    --clr-primary-1: #000;
+    --clr-primary-green: #58C93A;
+
+
+    --icon-bg-color: #E5E5E5;
+
+    /* footer bg icon colors */
+    --facebookColor: #1773EA;
+    --twitterColor: #25A2D7;
+    --behanceColor: #1E1E1E;
+    --dribbleColor: #F25679;
+}
