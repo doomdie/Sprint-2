@@ -1,13 +1,11 @@
-
-
 .image-grid {
     display: grid;
-    /* This forces exactly 4 equal columns */
-    grid-template-columns: repeat(4, 1fr); 
+
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
 }
 
-/* Basic styling for the grid "cells" */
+
 .grid-item {
     background-color: #f4f4f4;
     padding: 10px;
@@ -16,8 +14,8 @@
 }
 
 .grid-item img {
-    width: 100%;       /* Makes image fill the cell width */
-    aspect-ratio: 1/1; /* Keeps images as perfect squares */
-    object-fit: cover; /* Prevents stretching */
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
     display: block;
 }

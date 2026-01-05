@@ -5,6 +5,18 @@ const gImages = [
     { id: 'i104', name: 'I Like!', url: 'img/wedge.png' },
     { id: 'i105', name: '???', url: 'img/my-img.jpg' }
 ]
+var gMeme = {
+selectedImgId: 5,
+selectedLineIdx: 0,
+lines: [
+{
+txt: 'I sometimes eat Falafel',
+size: 20,
+color: 'red'
+}
+]
+}
+var gKeywordSearchCountMap = {'funny': 12,'cat': 16, 'baby': 2}
 function getImageById(id) {
     
     return gImages.find(img => img.id === id)
@@ -18,4 +30,7 @@ function getImages() {
 
 function getImgById(imgId) {
     return gImages.find(img => img.id === imgId)
+}
+function setLineText(txt) {
+    gMeme.lines[gMeme.selectedLineIdx].txt = txt;
 }

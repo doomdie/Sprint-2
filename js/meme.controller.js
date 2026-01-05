@@ -26,3 +26,4 @@ function onImageClick(imageId) {
     console.log('YAIR OVER HERE! ID:', imageId)
    
 }
+

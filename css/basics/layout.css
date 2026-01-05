@@ -1,5 +1,5 @@
 .main-layout {
-    
+
     display: grid;
 
     grid-template-columns: 16px 1fr 16px;
@@ -14,23 +14,24 @@
         }
     }
 }
+
 .cube-grid {
-    
+
     display: grid;
-    /* This tells the grid: "Make as many 150px columns as will fit" */
+
     grid-template-columns: repeat(4, 1fr);
 
-    gap: 20px; /* The space between the cubes */
+    gap: 20px;
     padding: 20px;
     max-width: 2000px;
     margin: 0 auto;
 }
 
 .cube {
-    /* Makes them perfect squares like your drawing */
+
     aspect-ratio: 1 / 1;
-    
-    /* Styling to match the drawing */
+
+
     border: 2px solid #ccc;
     display: flex;
     justify-content: center;
@@ -40,28 +41,160 @@
     background-image: url('/img/ball.png');
     background-repeat: no-repeat;
     background-position: center;
-    
-   
+
+
     background-size: contain;
 }
-.editor-layout {
-     
+
+/* .editor-layout {
+
     display: grid;
 
     grid-template-columns: 1fr 1fr;
 
 }
+
 .display-meme {
     display: grid;
-    place-items: center; 
-    padding: 20px;      
-    background-color: #f0f0f0; 
+    place-items: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+
+    position: relative;
+    width: fit-content;
+    margin: auto;
+} */
+
+/* .display-meme img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: block;
+} */
+.display-meme img {
+    width: 500px;
+    height: auto;
 }
 
-.display-meme img {
-    max-width: 100%;    
-    max-height: 80vh;  
-    object-fit: contain; 
-    border-radius: 8px; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+.meme-text {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    text-align: center;
+    color: white;
+    font-family: 'Impact', sans-serif;
+    font-size: 2rem;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+    pointer-events: none;
+}
+
+
+.top-text {
+    top: 40px;
+}
+
+.bottom-text {
+    bottom: 40px;
+}
+
+.meme-text {
+    position: absolute;
+    z-index: 10;
+
+}
+
+.meme-text {
+    position: absolute;
+    z-index: 10;
+
+}
+
+
+.editor-layout {
+    display: grid;
+
+    grid-template-columns: 1fr 350px;
+    gap: 30px;
+    align-items: start;
+    padding: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+
+.display-meme {
+    position: relative;
+    justify-self: center;
+}
+
+
+.editor-ui {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 12px;
+}
+
+
+@media (max-width: 800px) {
+    .editor-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.carousel-container {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+
+.previews {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.box {
+    aspect-ratio: 1 / 1;
+    border: 1px solid #000;
+    display: grid;
+    place-items: center;
+    background-color: #fff;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.box:hover {
+    transform: scale(1.05);
+    background-color: #e0e0e0;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.meme-text.selected {
+    border: 2px dashed #ffcf00;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+}
+
+.meme-text {
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
 }

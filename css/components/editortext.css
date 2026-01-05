@@ -1,0 +1,12 @@
+.meme-text {
+    position: absolute;
+    z-index: 10; 
+}
+.display-meme {
+    position: relative;
+    display: inline-block; 
+}
+.meme-text {
+    pointer-events: auto; 
+    cursor: text;
+}

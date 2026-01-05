@@ -1,5 +1,3 @@
-/* flex helpers */
-
 .flex {
     display: flex;
 
@@ -12,25 +10,27 @@
     }
 }
 
-/* list helpers */
+
 
 .clean-list {
     margin: 0;
     padding: 0;
     list-style-type: none;
 }
+
 .sticky {
     position: sticky;
-    
-    /* 2. Tell it WHERE to stick (the very top) */
+
+
     top: 0;
-    
-    /* 3. Keep it above other content */
+
+
     z-index: 1000;
-    
-    /* 4. Optional: Give it a background so content doesn't bleed through */
+
+
     background-color: white;
 }
+
 .grid {
     display: grid;
 
