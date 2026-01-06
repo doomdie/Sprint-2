@@ -46,3 +46,14 @@ function onSetLineText(txt) {
     const elActive = elTexts[gCurrTextIdx]
     elActive.value = txt
 }
+function colorPicker(color) {
+ 
+  const root = document.documentElement;
+
+  // Set the new value for the CSS variable
+  root.style.setProperty('--clr-primary--1', color);
+  
+  console.log(`Theme updated to: ${color}`);
+  
+ 
+}

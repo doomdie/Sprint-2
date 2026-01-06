@@ -20,54 +20,58 @@
             </ul>
         </nav>
     </header>
- <main class="main-content editor-layout">
-    <section class="display-meme" id="display-meme">
-        <img src="img/ball.png" alt="Meme Description">
-        <input type="text" class="meme-text top-text" value="TOP TEXT HERE">
-        <input type="text" class="meme-text bottom-text" value="BOTTOM TEXT HERE">
-    </section>
+    <main class="main-content editor-layout">
+        <section class="display-meme" id="display-meme">
+            <img src="img/ball.png" alt="Meme Description">
+            <input type="text" class="meme-text top-text" value="TOP TEXT HERE">
+            <input type="text" class="meme-text bottom-text" value="BOTTOM TEXT HERE">
+        </section>
 
-    <section class="editor-ui">
-       <input 
-    type="text" 
-    class="control-input" 
-    placeholder="Text line" 
-    oninput="onSetLineText(this.value)"
->
-        
+        <section class="editor-ui">
+            <input type="text" class="control-input" placeholder="Text line" oninput="onSetLineText(this.value)">
 
-        <div class="control-grid-small">
-           <button class="control-btn" onclick="onSelectBottomText()">DOWN<button class="control-btn" onclick="onSelectTopText()">⬆️</button><button class="btn-switch" onclick="onSwitchText()">↕️</button><button>+</button><button>🗑️</button>
-        </div>
 
-        <div class="styling-grid">
-            <button>A+</button><button>A-</button><button>L</button><button>C</button><button>R</button>
-            <select class="font-select"><option>IMPACT</option></select>
-            <button>S</button><button>🎨</button>
-        </div>
+            <div class="control-grid-small">
+                <button class="control-btn" onclick="onSelectBottomText()">DOWN<button class="control-btn"
+                        onclick="onSelectTopText()">⬆️</button><button class="btn-switch"
+                        onclick="onSwitchText()">↕️</button><button>+</button><button>🗑️</button>
+            </div>
 
-       <div class="carousel-container">
-    <button class="nav-btn">◀</button>
-    
-    <div class="previews">
-        <div class="box">X</div>
-        <div class="box">X</div>
-        <div class="box">X</div>
-        <div class="box">X</div>
-    </div>
-    
-    <button class="nav-btn">▶</button>
-</div>
+            <div class="styling-grid">
+                <button>A+</button><button>A-</button><button>L</button><button>C</button><button>R</button>
+                <select class="font-select">
+                    <option>IMPACT</option>
+                </select>
+                <button>S</button><label for="colorPicker" style="cursor: pointer;">
+                    <button type="button" style="pointer-events: none;">🎨</button>
+                </label>
 
-        <div class="footer-btns">
-            <button class="share">Share</button>
-            <button class="download">Download</button>
-        </div>
-    </section>
-</main>
+                <input type="color" id="colorPicker" id="colorPicker" oninput="colorPicker(this.value)"
+                    style="opacity: 0; width: 0; height: 0; position: absolute;">
+            </div>
+
+            <div class="carousel-container">
+                <button class="nav-btn">◀</button>
+
+                <div class="previews">
+                    <div class="box">X</div>
+                    <div class="box">X</div>
+                    <div class="box">X</div>
+                    <div class="box">X</div>
+                </div>
+
+                <button class="nav-btn">▶</button>
+            </div>
+
+            <div class="footer-btns">
+                <button class="share">Share</button>
+                <button class="download">Download</button>
+            </div>
+        </section>
+    </main>
     <script src="js/services/editor.service.js"></script>
     <script src="js/editor.controller.js"></script>
-    
+
 
 </body>
 
