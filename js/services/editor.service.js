@@ -1,5 +1,6 @@
 let gCurrentColor = 'white'
 let gNextColor = 'white'
+
 const gImages = [
     { id: 'i101', name: 'Funny Ball', url: 'img/ball.png' },
     { id: 'i102', name: 'Crying Man', url: 'img/dedge.png' },
@@ -26,6 +27,7 @@ var gMeme = {
         }
     ]
 }
+
 var gKeywordSearchCountMap = {'funny': 12,'cat': 16, 'baby': 2}
 function getImageById(id) {
     

@@ -1,7 +1,7 @@
 let gCanvas;
 let gCtx;
 let gCurrTextIdx = 0;
-
+const TOUCH_EVENTS = ['touchstart', 'touchmove', 'touchend']
 function onInit() {
     const elCanvas = document.getElementById('meme-canvas')
     if (!elCanvas) {
@@ -24,12 +24,19 @@ function onInit() {
     }
 
     renderMeme();
+    addMouseListeners()
 }
+
+// function addMouseListeners() {
+// 	gCanvas.addEventListener('mousedown', onDown)
+// 	gCanvas.addEventListener('mousemove', onMove)
+// 	gCanvas.addEventListener('mouseup', onUp)
+// }
 
 function onSwitchText() {
     const meme = getMeme()
     const nextIdx = (meme.selectedLineIdx === 0) ? 1 : 0
-    setSelectedLine(nextIdx) 
+    setSelectedLine(nextIdx)
     const currLine = meme.lines[nextIdx]
     const elInput = document.querySelector('.control-input')
     elInput.value = currLine.txt
@@ -64,8 +71,14 @@ function colorPicker(color) {
 
 
 }
-function onSetFontSize(num) {
-    
+function onSetFontSize(diff) {
+    setFontSize(diff)
+}
+function setFontSize(diff) {
+    const line = gMeme.lines[gMeme.selectedLineIdx]
+    line.size += diff
+    if (line.size < 10) line.size = 10
+    if (line.size > 100) line.size = 100
 }
 function renderMeme() {
     if (!gCtx) return
@@ -73,17 +86,17 @@ function renderMeme() {
     const imgData = getImageById(meme.selectedImgId)
     if (!imgData) return
     const img = new Image()
-    img.src = imgData.url 
+    img.src = imgData.url
     img.onload = () => {
         gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
         meme.lines.forEach((line, idx) => {
-            console.log('Drawing line index:', idx, line.txt) 
+            console.log('Drawing line index:', idx, line.txt)
             const { txt, size, color, pos } = line
-             gCtx.fillStyle = color
+            gCtx.fillStyle = color
             gCtx.lineWidth = 2
             gCtx.strokeStyle = 'black'
-           
+
             gCtx.font = `${size}px Impact`
             gCtx.textAlign = 'center'
             gCtx.textBaseline = 'middle'
@@ -100,12 +113,12 @@ function renderMeme() {
 function drawTextFrame(line) {
     const textWidth = gCtx.measureText(line.txt).width
     const padding = 15
-    
+
     gCtx.strokeStyle = 'yellow'
     gCtx.strokeRect(
-        line.pos.x - (textWidth / 2) - padding, 
-        line.pos.y - (line.size / 2) - padding, 
-        textWidth + (padding * 2), 
+        line.pos.x - (textWidth / 2) - padding,
+        line.pos.y - (line.size / 2) - padding,
+        textWidth + (padding * 2),
         line.size + (padding * 2)
     )
 }
@@ -126,3 +139,14 @@ function onSelectLine(idx) {
     renderMeme()
 }
 renderMeme()
+function downloadCanvas() {
+    setSelectedLine(null)
+    renderMeme()
+    setTimeout(() => {
+        const dataUrl = gCanvas.toDataURL('image/png')
+        const link = document.createElement('a')
+        link.href = dataUrl
+        link.download = 'my-meme.png'
+        link.click()
+    }, 50)
+}
