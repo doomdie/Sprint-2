@@ -79,3 +79,18 @@ function setLineColor(color) {
     const line = gMeme.lines[gMeme.selectedLineIdx]
     line.color = color
 }
+function addLine() {
+    let yPos = 250 
+    if (gMeme.lines.length === 0) yPos = 50
+    if (gMeme.lines.length === 1) yPos = 400
+
+    const newLine = {
+        txt: 'Enter Text',
+        size: 40,
+        color: '#ffffff',
+        pos: { x: 250, y: yPos }
+    }
+
+    gMeme.lines.push(newLine)
+    gMeme.selectedLineIdx = gMeme.lines.length - 1
+}

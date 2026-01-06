@@ -27,11 +27,7 @@ function onInit() {
     addMouseListeners()
 }
 
-// function addMouseListeners() {
-// 	gCanvas.addEventListener('mousedown', onDown)
-// 	gCanvas.addEventListener('mousemove', onMove)
-// 	gCanvas.addEventListener('mouseup', onUp)
-// }
+
 
 function onSwitchText() {
     const meme = getMeme()
@@ -149,4 +145,10 @@ function downloadCanvas() {
         link.download = 'my-meme.png'
         link.click()
     }, 50)
+}
+function onAddLine() {
+    addLine() 
+    renderMeme() 
+    document.querySelector('.control-input').value = ''
+    document.querySelector('.control-input').focus()
 }
