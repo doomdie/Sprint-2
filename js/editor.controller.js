@@ -30,9 +30,12 @@ function onSwitchText() {
     const meme = getMeme()
     const nextIdx = (meme.selectedLineIdx === 0) ? 1 : 0
     setSelectedLine(nextIdx) 
+    const currLine = meme.lines[nextIdx]
     const elInput = document.querySelector('.control-input')
-    elInput.value = meme.lines[nextIdx].txt
+    elInput.value = currLine.txt
     elInput.focus()
+    const elColorPicker = document.querySelector('#colorPicker')
+    if (elColorPicker) elColorPicker.value = currLine.color
     renderMeme()
 }
 function onSelectTopText() {
@@ -44,7 +47,7 @@ function onSelectTopText() {
 function onSelectBottomText() {
     setSelectedLine(1);
     const meme = getMeme();
-    document.querySelector('.control-input').value = meme.lines[0].txt;
+    document.querySelector('.control-input').value = meme.lines[1].txt;
     renderMeme();
 }
 function onSetLineText(txt) {
@@ -52,6 +55,7 @@ function onSetLineText(txt) {
     const elTexts = document.querySelectorAll('.meme-text')
     const elActive = elTexts[gCurrTextIdx]
     elActive.value = txt
+    renderMeme()
 }
 function colorPicker(color) {
     const root = document.documentElement;
@@ -59,6 +63,9 @@ function colorPicker(color) {
     console.log(`Theme updated to: ${color}`);
 
 
+}
+function onSetFontSize(num) {
+    
 }
 function renderMeme() {
     if (!gCtx) return
@@ -73,9 +80,10 @@ function renderMeme() {
         meme.lines.forEach((line, idx) => {
             console.log('Drawing line index:', idx, line.txt) 
             const { txt, size, color, pos } = line
+             gCtx.fillStyle = color
             gCtx.lineWidth = 2
             gCtx.strokeStyle = 'black'
-            gCtx.fillStyle = color
+           
             gCtx.font = `${size}px Impact`
             gCtx.textAlign = 'center'
             gCtx.textBaseline = 'middle'

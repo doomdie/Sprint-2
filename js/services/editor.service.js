@@ -1,3 +1,5 @@
+let gCurrentColor = 'white'
+let gNextColor = 'white'
 const gImages = [
     { id: 'i101', name: 'Funny Ball', url: 'img/ball.png' },
     { id: 'i102', name: 'Crying Man', url: 'img/dedge.png' },
@@ -13,13 +15,13 @@ var gMeme = {
         {
             txt: 'I sometimes eat Falafel',
             size: 40,
-            color: 'white',
+            color: '#ffffff',
             pos: { x: 250, y: 50 }
         },
         {
             txt: 'But only on Tuesdays',
             size: 40,
-            color: 'white',
+            color: '#ffffff',
             pos: { x: 250, y: 450 } 
         }
     ]
@@ -70,4 +72,8 @@ function drawMeme() {
 function setImg(imgId) {
     console.log('Setting image ID to:', imgId)
     gMeme.selectedImgId = imgId
+}
+function setLineColor(color) {
+    const line = gMeme.lines[gMeme.selectedLineIdx]
+    line.color = color
 }
