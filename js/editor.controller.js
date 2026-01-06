@@ -1,44 +1,51 @@
+let gCanvas;
+let gCtx;
 let gCurrTextIdx = 0;
-function initEditor() {
+
+function onInit() {
+    const elCanvas = document.getElementById('meme-canvas')
+    if (!elCanvas) {
+        console.error('I DONT GET IT')
+        return;
+    }
+
+
+    gCanvas = elCanvas;
+    gCtx = gCanvas.getContext('2d')
+
     const urlParams = new URLSearchParams(window.location.search)
     const imageId = urlParams.get('id')
-    const selectedImg = getImageById(imageId)
-    if (selectedImg) {
-        const elMeme = document.getElementById('display-meme')
-        const elImg = elMeme.querySelector('img')
-        elImg.src = selectedImg.url
-        document.querySelector('h1').innerText = `Editing: ${selectedImg.name}`
-    } else {
-        window.location.href = 'index.html'
+
+    if (imageId) {
+        setImg(imageId);
+        const imgData = getImageById(imageId);
+        if (imgData) {
+        }
     }
+
+    renderMeme();
 }
-
-initEditor()
-
 
 function onSwitchText() {
-    const elTexts = document.querySelectorAll('.meme-text')
-    elTexts.forEach(el => el.classList.remove('selected'))
-    gCurrTextIdx = (gCurrTextIdx === 0) ? 1 : 0
-    const elActive = elTexts[gCurrTextIdx]
-    elActive.classList.add('selected')
-    elActive.focus()
+    const meme = getMeme()
+    const nextIdx = (meme.selectedLineIdx === 0) ? 1 : 0
+    setSelectedLine(nextIdx) 
+    const elInput = document.querySelector('.control-input')
+    elInput.value = meme.lines[nextIdx].txt
+    elInput.focus()
+    renderMeme()
 }
 function onSelectTopText() {
-    const elTexts = document.querySelectorAll('.meme-text')
-    elTexts.forEach(el => el.classList.remove('selected'))
-    gCurrTextIdx = 0
-    const elTop = elTexts[gCurrTextIdx]
-    elTop.classList.add('selected')
-    elTop.focus()
+    setSelectedLine(0);
+    const meme = getMeme();
+    document.querySelector('.control-input').value = meme.lines[0].txt;
+    renderMeme();
 }
 function onSelectBottomText() {
-    const elTexts = document.querySelectorAll('.meme-text')
-    elTexts.forEach(el => el.classList.remove('selected'))
-    gCurrTextIdx = 1
-    const elTop = elTexts[gCurrTextIdx]
-    elTop.classList.add('selected')
-    elTop.focus()
+    setSelectedLine(1);
+    const meme = getMeme();
+    document.querySelector('.control-input').value = meme.lines[0].txt;
+    renderMeme();
 }
 function onSetLineText(txt) {
     setLineText(txt)
@@ -47,13 +54,67 @@ function onSetLineText(txt) {
     elActive.value = txt
 }
 function colorPicker(color) {
- 
-  const root = document.documentElement;
+    const root = document.documentElement;
+    root.style.setProperty('--clr-primary--1', color);
+    console.log(`Theme updated to: ${color}`);
 
-  // Set the new value for the CSS variable
-  root.style.setProperty('--clr-primary--1', color);
-  
-  console.log(`Theme updated to: ${color}`);
-  
- 
+
 }
+function renderMeme() {
+    if (!gCtx) return
+    const meme = getMeme()
+    const imgData = getImageById(meme.selectedImgId)
+    if (!imgData) return
+    const img = new Image()
+    img.src = imgData.url 
+    img.onload = () => {
+        gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
+        gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
+        meme.lines.forEach((line, idx) => {
+            console.log('Drawing line index:', idx, line.txt) 
+            const { txt, size, color, pos } = line
+            gCtx.lineWidth = 2
+            gCtx.strokeStyle = 'black'
+            gCtx.fillStyle = color
+            gCtx.font = `${size}px Impact`
+            gCtx.textAlign = 'center'
+            gCtx.textBaseline = 'middle'
+
+            gCtx.fillText(txt, pos.x, pos.y)
+            gCtx.strokeText(txt, pos.x, pos.y)
+
+            if (idx === meme.selectedLineIdx) {
+                drawTextFrame(line)
+            }
+        })
+    }
+}
+function drawTextFrame(line) {
+    const textWidth = gCtx.measureText(line.txt).width
+    const padding = 15
+    
+    gCtx.strokeStyle = 'yellow'
+    gCtx.strokeRect(
+        line.pos.x - (textWidth / 2) - padding, 
+        line.pos.y - (line.size / 2) - padding, 
+        textWidth + (padding * 2), 
+        line.size + (padding * 2)
+    )
+}
+
+
+function onSetColor(color) {
+    setLineColor(color)
+    renderMeme()
+}
+
+function onSetLineText(txt) {
+    setLineText(txt)
+    renderMeme()
+}
+
+function onSelectLine(idx) {
+    setSelectedLine(idx)
+    renderMeme()
+}
+renderMeme()

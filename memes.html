@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body>
+<body onload="onInit()">
     <header class="pageheader sticky flex space-between align-center full">
         <div class="logo">Blogin<span>.</span></div>
         <nav class="headernav">
@@ -22,19 +22,19 @@
     </header>
     <main class="main-content editor-layout">
         <section class="display-meme" id="display-meme">
-            <img src="img/ball.png" alt="Meme Description">
-            <input type="text" class="meme-text top-text" value="TOP TEXT HERE">
-            <input type="text" class="meme-text bottom-text" value="BOTTOM TEXT HERE">
+            <canvas id="meme-canvas" width="500" height="500" style="width: 100%; height: auto;"></canvas>
         </section>
+
 
         <section class="editor-ui">
             <input type="text" class="control-input" placeholder="Text line" oninput="onSetLineText(this.value)">
 
 
             <div class="control-grid-small">
-                <button class="control-btn" onclick="onSelectBottomText()">DOWN<button class="control-btn"
-                        onclick="onSelectTopText()">⬆️</button><button class="btn-switch"
-                        onclick="onSwitchText()">↕️</button><button>+</button><button>🗑️</button>
+
+                <button class="control-btn" onclick="onSelectBottomText()">DOWN</button>
+                <button class="control-btn" onclick="onSelectTopText()">⬆️</button></button><button class="btn-switch"
+                    onclick="onSwitchText()">↕️</button><button>+</button><button>🗑️</button>
             </div>
 
             <div class="styling-grid">
@@ -46,8 +46,7 @@
                     <button type="button" style="pointer-events: none;">🎨</button>
                 </label>
 
-                <input type="color" id="colorPicker" id="colorPicker" oninput="colorPicker(this.value)"
-                    style="opacity: 0; width: 0; height: 0; position: absolute;">
+                <input type="color" id="colorPicker" oninput="onSetColor(this.value)">
             </div>
 
             <div class="carousel-container">

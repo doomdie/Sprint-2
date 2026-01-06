@@ -49,17 +49,22 @@
 
 
 .meme-text {
+    
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     width: 80%;
     text-align: center;
-    color: var(--clr-primary--1);
+    color: white;
+
     font-family: 'Impact', sans-serif;
     font-size: 2rem;
     text-transform: uppercase;
     text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
     pointer-events: none;
+    &.selected.active {
+        
+    }
 }
 
 
