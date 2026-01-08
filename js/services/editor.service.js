@@ -108,11 +108,11 @@ function addLine() {
     gMeme.selectedLineIdx = gMeme.lines.length - 1
 }
 function moveLine(dx, dy) {
+    
     const line = gMeme.lines[gMeme.selectedLineIdx];
     line.pos.x += dx;
     line.pos.y += dy;
 }
-
 
 function isTextHit(clickedPos, line) {
     const { pos, size, txt } = line

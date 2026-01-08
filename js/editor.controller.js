@@ -156,11 +156,13 @@ function addListeners() {
     gCanvas.addEventListener('mousedown', onDown);
     gCanvas.addEventListener('mousemove', onMove);
     gCanvas.addEventListener('mouseup', onUp);
+    window.addEventListener('keydown', onMoveLine)
 }
 
 function onMove(ev) {
     if (!isDragging) return;
     const pos = getEvPos(ev);
+
     const dx = pos.x - startPos.x;
     const dy = pos.y - startPos.y;
 
@@ -191,9 +193,35 @@ function getEvPos(ev) {
     return pos;
 }
 function onDeleteLine() {
-    
-   gMeme.lines.splice(gMeme.selectedLineIdx, 1)
-   gMeme.selectedLineIdx = 0;
-   renderMeme();
+
+    gMeme.lines.splice(gMeme.selectedLineIdx, 1)
+    gMeme.selectedLineIdx = 0;
+    renderMeme();
 
 }
+function onKeyDown() {
+
+    if (!gMeme.selectedLineIdx) return
+
+}
+function onMoveLine(ev) {
+
+    if (ev.key === 'ArrowDown') {
+        ev.preventDefault()
+
+        const STEP = 10
+        moveLine(0, STEP)
+
+        renderMeme()
+    }
+    if (ev.key === 'ArrowUp') {
+        ev.preventDefault()
+
+        const STEP = 10
+        moveLine(0, -STEP)
+
+        renderMeme()
+    }
+}
+
+//Make it so when you click it it selecttts it even if you don't drag it

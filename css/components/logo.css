@@ -1,12 +1,6 @@
-.image-grid {
-    display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-}
 
 
-.grid-item {
+/* .grid-item {
     background-color: #f4f4f4;
     padding: 10px;
     border-radius: 8px;
@@ -18,9 +12,9 @@
     aspect-ratio: 1/1;
     object-fit: cover;
     display: block;
-}
+} */
 .logo {
     margin-left: 50px;
     font-family: Phanto, sans-serif;
-    font-size: 3.5em;
+    font-size: 2.5em;
 }

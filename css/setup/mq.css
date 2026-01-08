@@ -1,0 +1,50 @@
+@media (min-width: 1120px) {
+    .main-layout {
+         display: grid;
+
+    grid-template-columns: 16px 1fr 16px;
+
+    >* {
+        &:not(.full) {
+            grid-column: 2;
+        }
+
+        &.full {
+            grid-column: 1 / -1;
+        }
+        &.pageheader {
+            
+            height: 161px;
+
+        }
+        .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    max-width: 1000px; 
+    margin: 0 auto;
+    gap: 15px;
+}
+    }
+
+    }
+}
+@media (max-width: 940px)  {
+     .main-layout {
+         display: grid; 
+        grid-template-columns:  1fr;
+        >*{
+             &.pageheader {
+            
+            height: 160px;
+
+        }
+        }
+     }
+     .image-grid {
+        /* I got this one online :/ */
+       grid-template-columns: repeat(2, minmax(0, 1fr));
+        display:grid;
+        max-width: 100%; 
+       
+    }
+    }
