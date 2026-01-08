@@ -24,7 +24,7 @@ function onInit() {
     }
 
     renderMeme();
-    addMouseListeners()
+    addListeners()
 }
 
 
@@ -147,8 +147,53 @@ function downloadCanvas() {
     }, 50)
 }
 function onAddLine() {
-    addLine() 
-    renderMeme() 
+    addLine()
+    renderMeme()
     document.querySelector('.control-input').value = ''
     document.querySelector('.control-input').focus()
+}
+function addListeners() {
+    gCanvas.addEventListener('mousedown', onDown);
+    gCanvas.addEventListener('mousemove', onMove);
+    gCanvas.addEventListener('mouseup', onUp);
+}
+
+function onMove(ev) {
+    if (!isDragging) return;
+    const pos = getEvPos(ev);
+    const dx = pos.x - startPos.x;
+    const dy = pos.y - startPos.y;
+
+    moveLine(dx, dy);
+    renderMeme();
+    startPos = pos;
+}
+function onUp() {
+    isDragging = false;
+    document.body.style.cursor = 'grab';
+}
+function onDown(ev) {
+    const pos = getEvPos(ev)
+    const lineIdx = gMeme.lines.findIndex(line => isTextHit(pos, line))
+
+    if (lineIdx !== -1) {
+        gMeme.selectedLineIdx = lineIdx
+        isDragging = true
+        startPos = pos
+        document.body.style.cursor = 'grabbing'
+    }
+}
+function getEvPos(ev) {
+    let pos = {
+        x: ev.offsetX,
+        y: ev.offsetY
+    };
+    return pos;
+}
+function onDeleteLine() {
+    
+   gMeme.lines.splice(gMeme.selectedLineIdx, 1)
+   gMeme.selectedLineIdx = 0;
+   renderMeme();
+
 }

@@ -19,3 +19,8 @@
     object-fit: cover;
     display: block;
 }
+.logo {
+    margin-left: 50px;
+    font-family: Phanto, sans-serif;
+    font-size: 3.5em;
+}

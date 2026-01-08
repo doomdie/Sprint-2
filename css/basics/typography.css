@@ -1,0 +1,13 @@
+/* @font-face {
+    font-family: Lato-Regular;
+    src: url(../../fonts/Lato-Regular.ttf);
+} */
+
+@font-face {
+    font-family: Phanto;
+    src: url(../../fonts/monofonto.ttf);
+}
+@font-face {
+    font-family: Nuevo;
+    src: url(../../fonts/nouveau-ibm.ttf);
+}
