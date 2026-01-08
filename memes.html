@@ -32,13 +32,13 @@
 
             <div class="control-grid-small">
 
-                <button class="control-btn" onclick="onSelectBottomText()">DOWN</button>
+                <button class="control-btn" onclick="onSelectBottomText()">⬇️</button>
                 <button class="control-btn" onclick="onSelectTopText()">⬆️</button></button><button class="btn-switch"
-                    onclick="onSwitchText()">↕️</button><button>+</button><button onclick="onDeleteLine()">🗑️</button>
+                    onclick="onSwitchText()">↕️</button><button onclick = "onAddLine()">+</button><button onclick="onDeleteLine()">🗑️</button>
             </div>
 
             <div class="styling-grid"> 
-                <button onclick="onSetFontSize(5)">A+</button><button  onclick="onSetFontSize(-5)">A-</button><button onclick = "onAddLine()">ADD LINE</button><button>C</button><button>R</button>
+                <button onclick="onSetFontSize(5)">A+</button><button  onclick="onSetFontSize(-5)">A-</button><button>C</button><button>R</button>
                 <select class="font-select">
                     <option>IMPACT</option>
                 </select>
@@ -62,9 +62,8 @@
                 <button class="nav-btn">▶</button>
             </div>
 
-            <div class="footer-btns">
+            <div class="footer-btns  flex space-between align-center">
                 <button class="share">Share</button>
-                <button class="download" onclick = "downloadCanvas(this)">Download</button>
                 <a href="#" onclick="downloadCanvas(this)" download="file-name">Download</a>
             </div>
         </section>

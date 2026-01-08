@@ -1,4 +1,8 @@
-
+const gQueryOptions = {
+    filterBy: { txt: '', minSpeed: 0 },
+    sortBy: {},
+    page: { idx: 0, size: 4 },
+}
 onInit()
 
 function onInit() {
@@ -7,9 +11,12 @@ function onInit() {
 
 
 function renderGrid() {
+    // var filtMeme = gImages
+        var filtMeme = getMemes(gQueryOptions)
+
     const elGrid = document.getElementById('imageGrid')
     
-    const strHtmls = gImages.map(img => `
+    const strHtmls = filtMeme.map(img => `
        <article class="grid-item">
             <a href="memes.html?id=${img.id}">
                 <img src="${img.url}" alt="${img.name}">
@@ -27,3 +34,8 @@ function onImageClick(imageId) {
    
 }
 
+function onSetFilterBy() {
+    const elTxtInput = document.querySelector('.filter-by .txt')
+    gQueryOptions.filterBy.txt = elTxtInput.value
+    renderGrid()
+}

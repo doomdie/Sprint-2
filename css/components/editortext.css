@@ -10,3 +10,16 @@
     pointer-events: auto; 
     cursor: text;
 }
+.editor-ui {
+    button {
+        background-color:rgb(255, 177, 75);
+        border: 1px solid #ff0000;
+        width: 50px;        
+        height: 50px;              
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        box-sizing: border-box;
+    }
+}

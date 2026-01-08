@@ -9,6 +9,8 @@
 </head>
 
 <body class="main-layout">
+    
+				
     <header class="pageheader sticky flex space-between align-center full">
         <div class="logo">Meme Generator<span>.</span></div>
         <nav class="headernav">
@@ -26,6 +28,14 @@
                 <input type="search" id="mySearch" placeholder="Search...">
                 <button type="submit">Go</button>
             </form>
+            <div class="filter-by">
+					<input
+						class="vendor txt"
+						oninput="onSetFilterBy()"
+						placeholder="Search a meme!"
+						type="text"></div>
+
+
             <nav class="headernav">
                 <ul class="clean-list flex">
                     <li><a href="/">Gallery</a></li>

@@ -4,11 +4,15 @@ let isDragging = false
 let startPos
 
 const gImages = [
-    { id: 'i101', name: 'Funny Ball', url: 'img/ball.png' },
-    { id: 'i102', name: 'Crying Man', url: 'img/dedge.png' },
-    { id: 'i103', name: 'Laughing Man', url: 'img/hedge.png' },
-    { id: 'i104', name: 'I Like!', url: 'img/wedge.png' },
-    { id: 'i105', name: '???', url: 'img/my-img.jpg' }
+    { id: 'i101', name: 'Funny Ball', url: 'img/ball.png', tags: ['Shapes','Abstract','New'] },
+    { id: 'i102', name: 'Crying Man', url: 'img/dedge.png', tags: ['Rage Comic', 'Cartoon','Sad'] },
+    { id: 'i103', name: 'Laughing Man', url: 'img/hedge.png', tags: ['Rage Comic', 'Cartoon', 'Happy'] },
+    { id: 'i104', name: 'I Like!', url: 'img/wedge.png', tags: ['Rage Comic', "Carttoon", "Really Happy"] },
+    { id: 'i105', name: '???', url: 'img/test.png', tags: ["Unknown","Mystery","Huh"] },
+    { id: 'i105', name: '???', url: 'img/test.png', tags: ["Unknown","Mystery","Huh"] },
+    { id: 'i105', name: '???', url: 'img/test.png', tags: ["Unknown","Mystery","Huh"] },
+    { id: 'i105', name: '???', url: 'img/test.png', tags: ["Unknown","Mystery","Huh"] },
+    { id: 'i105', name: '???', url: 'img/test.png', tags: ["Unknown","Mystery","Huh"] }
 ]
 
 var gMeme = {
@@ -29,8 +33,15 @@ var gMeme = {
         }
     ]
 }
+function getMemes(options = {}) {
+    const filterBy = options.filterBy
+    // const sortBy = options.sortBy
+    // const page = options.page
 
-var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
+    var memesToDisplay = _filterMemes(filterBy)
+    return memesToDisplay
+}
+// var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 function getImageById(id) {
 
     return gImages.find(img => img.id === id)
@@ -117,4 +128,12 @@ function isTextHit(clickedPos, line) {
         clickedPos.y >= boundaryTop &&
         clickedPos.y <= boundaryBottom
     )
+}
+function _filterMemes(filterBy) {
+    var memesToDisplay = gImages.slice()
+    if (filterBy.txt) {
+        const regexTxt = new RegExp(filterBy.txt, 'i')
+        memesToDisplay = memesToDisplay.filter(meme => regexTxt.test(meme.name))
+    }
+    return memesToDisplay
 }
