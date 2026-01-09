@@ -1,5 +1,8 @@
 * {
     box-sizing: border-box;
+     box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
@@ -11,6 +14,12 @@ body {
     margin: 0;
     font-size: 0.875rem;
     background-color:rgba(0, 0, 0, 0.856);
+
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    
+
 }
 
 h1,

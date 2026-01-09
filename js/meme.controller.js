@@ -39,3 +39,9 @@ function onSetFilterBy() {
     gQueryOptions.filterBy.txt = elTxtInput.value
     renderGrid()
 }
+function handleImageSignal(ev) {
+
+    const file = ev.target.files[0]
+    if (!file) return
+    onSaveMeme()
+}

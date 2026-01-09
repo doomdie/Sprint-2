@@ -1,22 +1,20 @@
-let gCurrentColor = 'white'
-let gNextColor = 'white'
-let isDragging = false
-let startPos
-
 const gImages = [
-    { id: 'i101', name: 'Funny Ball', url: 'img/ball.png', tags: ['Shapes','Abstract','New'] },
-    { id: 'i102', name: 'Crying Man', url: 'img/dedge.png', tags: ['Rage Comic', 'Cartoon','Sad'] },
+    { id: 'i101', name: 'Funny Ball', url: 'img/ball.png', tags: ['Shapes', 'Abstract', 'New'] },
+    { id: 'i102', name: 'Crying Man', url: 'img/dedge.png', tags: ['Rage Comic', 'Cartoon', 'Sad'] },
     { id: 'i103', name: 'Laughing Man', url: 'img/hedge.png', tags: ['Rage Comic', 'Cartoon', 'Happy'] },
     { id: 'i104', name: 'I Like!', url: 'img/wedge.png', tags: ['Rage Comic', "Carttoon", "Really Happy"] },
-    { id: 'i105', name: '???', url: 'img/test.png', tags: ["Unknown","Mystery","Huh"] },
-    { id: 'i105', name: '???', url: 'img/test.png', tags: ["Unknown","Mystery","Huh"] },
-    { id: 'i105', name: '???', url: 'img/test.png', tags: ["Unknown","Mystery","Huh"] },
-    { id: 'i105', name: '???', url: 'img/test.png', tags: ["Unknown","Mystery","Huh"] },
-    { id: 'i105', name: '???', url: 'img/test.png', tags: ["Unknown","Mystery","Huh"] }
+    { id: 'i105', name: '???', url: 'img/test.png', tags: ["Unknown", "Mystery", "Huh"] },
+    { id: 'i105', name: '???', url: 'img/test.png', tags: ["Unknown", "Mystery", "Huh"] },
+    { id: 'i105', name: '???', url: 'img/test.png', tags: ["Unknown", "Mystery", "Huh"] },
+    { id: 'i105', name: '???', url: 'img/test.png', tags: ["Unknown", "Mystery", "Huh"] },
+    { id: 'i105', name: '???', url: 'img/test.png', tags: ["Unknown", "Mystery", "Huh"] },
+    { id: 'i105', name: '???', url: 'img/test.png', tags: ["Unknown", "Mystery", "Huh"] },
+    
 ]
 
 var gMeme = {
     selectedImgId: 'i101',
+    url: 'img/ball.png',
     selectedLineIdx: 0,
     lines: [
         {
@@ -33,6 +31,9 @@ var gMeme = {
         }
     ]
 }
+
+let gUserUploadedImg = null
+
 function getMemes(options = {}) {
     const filterBy = options.filterBy
     // const sortBy = options.sortBy
@@ -41,61 +42,51 @@ function getMemes(options = {}) {
     var memesToDisplay = _filterMemes(filterBy)
     return memesToDisplay
 }
-// var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
-function getImageById(id) {
-
-    return gImages.find(img => img.id === id)
+function getMeme() {
+    return gMeme
 }
-
-
 
 function getImages() {
     return gImages
 }
 
-function getImgById(imgId) {
-    return gImages.find(img => img.id === imgId)
-}
-function setLineText(txt) {
-    gMeme.lines[gMeme.selectedLineIdx].txt = txt
-}
-function setSelectedLine(idx) {
-    gMeme.selectedLineIdx = idx
-}
-function getMeme() {
-    return gMeme
-}
-const canvas = document.getElementById('meme-canvas')
-const ctx = canvas.getContext('2d')
-const img = new Image()
-img.src = 'img/ball.png'
-img.onload = () => {
-    drawMeme()
-}
-
-function drawMeme() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-    ctx.strokeStyle = 'black'
-    ctx.lineWidth = 4
-    ctx.font = 'bold 40px Impact'
-    ctx.textAlign = 'center'
-    ctx.textBaseline = 'top'
-
+function getImageById(id) {
+    return gImages.find(img => img.id === id)
 }
 
 function setImg(imgId) {
-    console.log('Setting image ID to:', imgId)
+    gUserUploadedImg = null
     gMeme.selectedImgId = imgId
 }
-function setLineColor(color) {
-    const line = gMeme.lines[gMeme.selectedLineIdx]
-    line.color = color
+
+function setMemeImg(img) {
+    gUserUploadedImg = img
+    gMeme.selectedImgId = null
 }
+
+function getUserImg() {
+    return gUserUploadedImg
+}
+
+function setLineText(txt) {
+    if (!gMeme.lines.length) return
+    
+    gMeme.lines[gMeme.selectedLineIdx].txt = txt
+}
+
+function setLineColor(color) {
+    if (!gMeme.lines.length) return
+    gMeme.lines[gMeme.selectedLineIdx].color = color
+}
+
+function setSelectedLine(idx) {
+    gMeme.selectedLineIdx = idx
+}
+
 function addLine() {
     let yPos = 250
     if (gMeme.lines.length === 0) yPos = 50
-    if (gMeme.lines.length === 1) yPos = 400
+    else if (gMeme.lines.length === 1) yPos = 400
 
     const newLine = {
         txt: 'Enter Text',
@@ -107,33 +98,32 @@ function addLine() {
     gMeme.lines.push(newLine)
     gMeme.selectedLineIdx = gMeme.lines.length - 1
 }
+
 function moveLine(dx, dy) {
-    
-    const line = gMeme.lines[gMeme.selectedLineIdx];
-    line.pos.x += dx;
-    line.pos.y += dy;
+    const line = gMeme.lines[gMeme.selectedLineIdx]
+    if (!line) return
+    line.pos.x += dx
+    line.pos.y += dy
 }
 
-function isTextHit(clickedPos, line) {
-    const { pos, size, txt } = line
-    const textWidth = gCtx.measureText(txt).width
-    const boundaryLeft = pos.x - textWidth / 2
-    const boundaryRight = pos.x + textWidth / 2
-    const boundaryTop = pos.y - size / 2
-    const boundaryBottom = pos.y + size / 2
-
-    return (
-        clickedPos.x >= boundaryLeft &&
-        clickedPos.x <= boundaryRight &&
-        clickedPos.y >= boundaryTop &&
-        clickedPos.y <= boundaryBottom
-    )
-}
 function _filterMemes(filterBy) {
-    var memesToDisplay = gImages.slice()
-    if (filterBy.txt) {
+    let memesToDisplay = gImages.slice()
+    if (filterBy && filterBy.txt) {
         const regexTxt = new RegExp(filterBy.txt, 'i')
-        memesToDisplay = memesToDisplay.filter(meme => regexTxt.test(meme.name))
+        memesToDisplay = memesToDisplay.filter(img => regexTxt.test(img.name))
     }
     return memesToDisplay
+}
+const STORAGE_KEY = 'memesDB'
+
+function saveMeme(imgDataUrl) {
+    const savedMemes = loadFromStorage(STORAGE_KEY) || []
+    
+    savedMemes.push(imgDataUrl)
+    
+    saveToStorage(STORAGE_KEY, savedMemes)
+}
+
+function getSavedMemes() {
+    return loadFromStorage(STORAGE_KEY) || []
 }

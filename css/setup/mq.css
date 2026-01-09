@@ -27,6 +27,24 @@
     }
 
     }
+    .editor-layout {
+    display: grid;
+
+    grid-template-columns: 1fr 350px;
+    gap: 30px;
+    align-items: start;
+    padding: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.editor-ui {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 12px;
+}
 }
 @media (max-width: 940px)  {
      .main-layout {
@@ -47,4 +65,30 @@
         max-width: 100%; 
        
     }
+.editor-layout {
+    height: 100vh;
+    display:grid;
+      
+          grid-template-rows: 1fr 1fr;
+     min-height: 400px;
+                &.pageheader {
+            
+            height: 160px;
+
+        }
+
+    }
+    .editor-ui {
+    display:grid;
+    
+    
+    background-color: #f7f7f7;
+    border-radius: 12px;
+    gap: 15px;
+    justify-items: center;
+    .editor-ui > * {
+    width: 80%;      
+     /*I can't for the life of me get this ui to look right on mobile. I'll focus on other things for now.*/
+}
+}
     }

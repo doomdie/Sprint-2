@@ -4,74 +4,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Meme Generator</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body onload="onInit()">
-    <header class="pageheader sticky flex space-between align-center full">
+    <header class="pageheader flex space-between align-center full">
         <div class="logo">Meme Generator<span>.</span></div>
         <nav class="headernav">
             <ul class="clean-list flex">
                 <li><a href="/">Gallery</a></li>
-                <li><a href="/">Memes</a></li>
+                <li><a href="savedmemes.html">Saved Memes</a></li>
                 <li><a href="/">About</a></li>
-
             </ul>
         </nav>
     </header>
+
     <main class="main-content editor-layout">
         <section class="display-meme" id="display-meme">
-            <canvas id="meme-canvas" width="500" height="500" style="width: 100%; height: auto;"></canvas>
+            <canvas id="meme-canvas" width="500" height="500"></canvas>
         </section>
 
-
         <section class="editor-ui">
+            
             <input type="text" class="control-input" placeholder="Text line" oninput="onSetLineText(this.value)">
-
-
-            <div class="control-grid-small">
-
+            <div class = "buttonwrapper">
+            <div class="control-row">
                 <button class="control-btn" onclick="onSelectBottomText()">⬇️</button>
-                <button class="control-btn" onclick="onSelectTopText()">⬆️</button></button><button class="btn-switch"
-                    onclick="onSwitchText()">↕️</button><button onclick = "onAddLine()">+</button><button onclick="onDeleteLine()">🗑️</button>
+                <button class="control-btn" onclick="onSelectTopText()">⬆️</button>
+                <button class="btn-switch" onclick="onSwitchText()">↕️</button>
+                <button onclick="onAddLine()">+</button>
+                <button onclick="onDeleteLine()">🗑️</button>
             </div>
 
-            <div class="styling-grid"> 
-                <button onclick="onSetFontSize(5)">A+</button><button  onclick="onSetFontSize(-5)">A-</button><button>C</button><button>R</button>
-                <select class="font-select">
-                    <option>IMPACT</option>
-                </select>
-                <button>S</button><label for="colorPicker" style="cursor: pointer;">
-                    <button type="button" style="pointer-events: none;">🎨</button>
-                </label>
-
-                <input type="color" id="colorPicker" oninput="onSetColor(this.value)">
+            <div class="styling-box"> 
+                <div class="control-row">
+                    <button onclick="onSetFontSize(5)">A+</button>
+                    <button onclick="onSetFontSize(-5)">A-</button>
+                    <button>C</button>
+                    <button>R</button>
+                    <button onclick="onAddImage()">L</button> </div>
+                
+                <div class="control-row">
+                    <select class="font-select">
+                        <option>IMPACT</option>
+                    </select>
+                    <button>S</button>
+                    <label for="colorPicker" class="color-label">
+                        🎨
+                        <input type="color" id="colorPicker" oninput="onSetColor(this.value)">
+                    </label>
+                </div>
             </div>
+</div>
+     <a href="#" class="download-link" onclick="onSaveMeme(this)" >Download</a>
 
+<input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
             <div class="carousel-container">
                 <button class="nav-btn">◀</button>
-
                 <div class="previews">
                     <div class="box">X</div>
                     <div class="box">X</div>
                     <div class="box">X</div>
                     <div class="box">X</div>
                 </div>
-
+                
                 <button class="nav-btn">▶</button>
             </div>
 
-            <div class="footer-btns  flex space-between align-center">
+            <div class="footer-btns flex space-between">
                 <button class="share">Share</button>
-                <a href="#" onclick="downloadCanvas(this)" download="file-name">Download</a>
+                <a href="#" class="download-link" onclick="downloadCanvas(this)" download="my-meme.png">Download</a>
             </div>
         </section>
     </main>
+    <script src="js/upload.service.js"></script>
     <script src="js/services/editor.service.js"></script>
+     <script src="js/services/storage.service.js"></script>
+    
     <script src="js/editor.controller.js"></script>
-
-
 </body>
-
 </html>
