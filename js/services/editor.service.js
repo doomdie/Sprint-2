@@ -35,7 +35,8 @@ var gMeme = {
 let gUserUploadedImg = null
 
 function getMemes(options = {}) {
-    const filterBy = options.filterBy
+    const filterBy = options.filterB
+    
     // const sortBy = options.sortBy
     // const page = options.page
 

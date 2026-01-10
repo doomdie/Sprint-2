@@ -10,5 +10,9 @@
     border-radius: 10px;
     border-color: lime;
     border-style: solid;
-    background-color:rgb(54, 85, 9)
+    background-color:rgb(54, 85, 9);
+    &.activated {
+                    height: 200px;
+
+    }
 }
