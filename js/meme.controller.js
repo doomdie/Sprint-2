@@ -3,12 +3,14 @@ const gQueryOptions = {
     sortBy: {},
     page: { idx: 0, size: 4 },
 }
+
 let gIsExpanded = false
 onInit()
 
 function onInit() {
     renderGrid()
     renderTagCloud()
+    
 }
 
 
@@ -76,6 +78,7 @@ function onImageClick(imageId) {
 }
 
 function onSetFilterBy() {
+    
     const elTxtInput = document.querySelector('.filter-by .txt')
     gQueryOptions.filterBy.txt = elTxtInput.value
     renderGrid()

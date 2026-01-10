@@ -11,6 +11,12 @@ const gImages = [
     { id: 'i105', name: '???', url: 'img/test.png', tags: ["Unknown", "Mystery", "Huh"] },
     
 ]
+const gStickers = [
+    { id: "s1", name: 'doggy', url: 'image.jpeg', img: null, pos: { x: 250, y: 50 }, size: 100 },
+    { id: "s2", name: 'tomato', url: 'tate.png', img: null, pos: { x: 250, y: 450 }, size: 100 },
+    { id: "s3", name: 'tomato', url: 'tate.png', img: null, pos: { x: 250, y: 450 }, size: 100 },
+    { id: "s4", name: 'tomato', url: 'tate.png', img: null, pos: { x: 250, y: 450 }, size: 100 }
+]
 
 var gMeme = {
     selectedImgId: 'i101',
@@ -30,16 +36,21 @@ var gMeme = {
             pos: { x: 250, y: 450 }
         }
     ]
+   
+
+}
+function prepareStickers() {
+    gStickers.forEach(sticker => {
+        const img = new Image()
+        img.src = sticker.url
+        sticker.img = img
+    })
 }
 
 let gUserUploadedImg = null
 
 function getMemes(options = {}) {
-    const filterBy = options.filterB
-    
-    // const sortBy = options.sortBy
-    // const page = options.page
-
+    const filterBy = options.filterBy
     var memesToDisplay = _filterMemes(filterBy)
     return memesToDisplay
 }

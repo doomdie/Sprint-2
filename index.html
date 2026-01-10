@@ -9,14 +9,14 @@
 </head>
 
 <body class="main-layout">
-    
-				
+
+
     <header class="pageheader sticky flex space-between align-center full">
         <div class="logo">Meme Generator<span>.</span></div>
         <nav class="headernav">
             <ul class="clean-list flex">
                 <li><a href="/">Gallery</a></li>
-                <li><a href="/">Memes</a></li>
+                 <li><a href="savedmemes.html">Saved Memes</a></li>
                 <li><a href="/">About</a></li>
 
             </ul>
@@ -24,32 +24,18 @@
     </header>
     <main class="main-content coollayout">
         <header class="ageheader flex space-between">
-            <form id="searchForm">
-                <input type="search" id="mySearch" placeholder="Search...">
-                <button type="submit">Go</button>
-            </form>
-            <div class="filter-by">
-					<input
-						class="vendor txt"
-						oninput="onSetFilterBy()"
-                        list = "car-suggestions"
-						placeholder="Search a meme!"
-						type="text"></div>
-                <datalist id="car-suggestions">
-        <option value="Helloy"></option>
-    <option value="Green"></option>
-    <option value="Blue"></option>
-    <option value="Ferrari"></option>
-</datalist>
-    <div id = "taggy" class ="taggy"> Hello</div>
-            <!-- <nav class="headernav">
-                <ul class="clean-list flex">
-                    <li><a href="/">Gallery</a></li>
-                    <li><a href="/">Memes</a></li>
-                    <li><a href="/">About</a></li>
 
-                </ul>
-            </nav> -->
+            <div class="filter-by">
+                <input class="vendor txt" oninput="onSetFilterBy()" list="meme-suggestions" placeholder="Search a meme!"
+                    type="text">
+            </div>
+            <datalist id="meme-suggestions">
+                <option value="Helloy"></option>
+                <option value="Green"></option>
+                <option value="Blue"></option>
+                <option value="Ferrari"></option>
+            </datalist>
+            <div id="taggy" class="taggy"> Hello</div>
         </header>
         <div class="image-grid" id="imageGrid">
         </div>

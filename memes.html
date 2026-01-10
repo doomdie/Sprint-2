@@ -26,49 +26,50 @@
         </section>
 
         <section class="editor-ui">
-            
-            <input type="text" class="control-input" placeholder="Text line" oninput="onSetLineText(this.value)">
-            <div class = "buttonwrapper">
-            <div class="control-row">
-                <button class="control-btn" onclick="onSelectBottomText()">⬇️</button>
-                <button class="control-btn" onclick="onSelectTopText()">⬆️</button>
-                <button class="btn-switch" onclick="onSwitchText()">↕️</button>
-                <button onclick="onAddLine()">+</button>
-                <button onclick="onDeleteLine()">🗑️</button>
-            </div>
 
-            <div class="styling-box"> 
+            <input type="text" class="control-input" placeholder="Text line" oninput="onSetLineText(this.value)">
+            <div class="buttonwrapper">
                 <div class="control-row">
-                    <button onclick="onSetFontSize(5)">A+</button>
-                    <button onclick="onSetFontSize(-5)">A-</button>
-                    <button>C</button>
-                    <button>R</button>
-                    <button onclick="onAddImage()">L</button> </div>
-                
-                <div class="control-row">
-                    <select class="font-select">
-                        <option>IMPACT</option>
-                    </select>
-                    <button>S</button>
-                    <label for="colorPicker" class="color-label">
-                        🎨
-                        <input type="color" id="colorPicker" oninput="onSetColor(this.value)">
-                    </label>
+                    <button class="control-btn" onclick="onSelectBottomText()">⬇️</button>
+                    <button class="control-btn" onclick="onSelectTopText()">⬆️</button>
+                    <button class="btn-switch" onclick="onSwitchText()">↕️</button>
+                    <button onclick="onAddLine()">+</button>
+                    <button onclick="onDeleteLine()">🗑️</button>
+                </div>
+
+                <div class="styling-box">
+                    <div class="control-row">
+                        <button onclick="onSetFontSize(5)">A+</button>
+                        <button onclick="onSetFontSize(-5)">A-</button>
+                        <button>C</button>
+                        <button>R</button>
+                        <button onclick="onAddImage()">L</button>
+                    </div>
+
+                    <div class="control-row">
+                        <select class="font-select">
+                            <option>IMPACT</option>
+                        </select>
+                        <button>S</button>
+                        <label for="colorPicker" class="color-label">
+                            🎨
+                            <input type="color" id="colorPicker" oninput="onSetColor(this.value)">
+                        </label>
+                    </div>
                 </div>
             </div>
-</div>
-     <a href="#" class="download-link" onclick="onSaveMeme(this)" >Download</a>
+            <a href="#" class="download-link" onclick="onSaveMeme(this)">Download</a>
 
-<input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
+            <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
             <div class="carousel-container">
                 <button class="nav-btn">◀</button>
-                <div class="previews">
-                    <div class="box">X</div>
-                    <div class="box">X</div>
-                    <div class="box">X</div>
-                    <div class="box">X</div>
+                <div class="previews" id = "previews">
+                    <img src="image.jpeg" class="box" alt="Meme 1">
+                    <img src="image.jpeg" class="box" alt="Meme 2">
+                    <img src="image.jpeg" class="box" alt="Meme 3">
+                    <img src="image.jpeg" class="box" alt="Meme 4">
                 </div>
-                
+
                 <button class="nav-btn">▶</button>
             </div>
 
@@ -80,8 +81,9 @@
     </main>
     <script src="js/upload.service.js"></script>
     <script src="js/services/editor.service.js"></script>
-     <script src="js/services/storage.service.js"></script>
-    
+    <script src="js/services/storage.service.js"></script>
+
     <script src="js/editor.controller.js"></script>
 </body>
+
 </html>

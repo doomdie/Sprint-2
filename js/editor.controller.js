@@ -4,7 +4,7 @@ let gCurrTextIdx = 0
 let gUserImg = null
 let isDragging = false
 let startPos = null
-
+var gStickersOnCanvas = []
 const TOUCH_EVENTS = ['touchstart', 'touchmove', 'touchend']
 
 function onInit() {
@@ -23,6 +23,8 @@ function onInit() {
 
     addListeners()
     renderMeme()
+    renderStickers()
+    prepareStickers()
 }
 
 function onSwitchText() {
@@ -67,6 +69,7 @@ function onSetFontSize(diff) {
 }
 
 function renderMeme() {
+    console.log(gMeme)
     if (!gCtx) return
     const meme = getMeme()
 
@@ -83,9 +86,16 @@ function renderMeme() {
 }
 
 function drawMemeContent(img, meme) {
+    // 1. Clear and Draw Background
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
 
+    // 2. DRAW STICKERS (The fix)
+    gStickers.forEach(sticker => {
+        gCtx.drawImage(sticker.img, sticker.pos.x, sticker.pos.y, sticker.size, sticker.size)
+    })
+
+    // 3. Draw Lines
     meme.lines.forEach((line, idx) => {
         const { txt, size, color, pos } = line
         gCtx.fillStyle = color
@@ -242,5 +252,47 @@ function onSaveMeme() {
         alert('Saved to LocalStorage!')
     }, 50)
 }
+function renderStickers() {
+    const elGrid = document.getElementById('previews')
 
-//Make it so when you click it it selecttts it even if you don't drag it
+    const strHtmls = gStickers.map((sticker, idx) => `
+        <article class="carousel-item">
+            <button class="sticker-btn" onclick="onSelectSticker(${idx})">
+                <img src="${sticker.url}" alt="${sticker.name}">
+            </button>
+            <h3>${sticker.name}</h3>
+        </article>
+    `).join('')
+
+    elGrid.innerHTML = strHtmls
+}
+function onSelectSticker(idx) {
+    const stickerData = gStickers[idx]
+    const img = new Image() 
+    img.src = stickerData.url
+
+    img.onload = () => {
+        const stickerInstance = {
+            img: img, 
+            pos: { x: 50, y: 50 },
+            size: 80
+        }
+        
+        gStickersOnCanvas.push(stickerInstance)
+        renderMeme() 
+    }
+}
+function addStickerToCanvas(sSticker) {
+    const elCanvas = document.querySelector('canvas');
+    const ctx = elCanvas.getContext('2d')
+    const img = new Image();
+    
+    
+    img.src = sSticker.url;
+
+    
+    img.onload = () => {
+        ctx.drawImage(img, 50, 50, 100, 100);
+        console.log(`Sticker ${sSticker.name} added to canvas!`);
+    };
+}
