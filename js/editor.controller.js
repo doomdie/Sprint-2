@@ -86,16 +86,13 @@ function renderMeme() {
 }
 
 function drawMemeContent(img, meme) {
-    // 1. Clear and Draw Background
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
 
-    // 2. DRAW STICKERS (The fix)
     gStickers.forEach(sticker => {
         gCtx.drawImage(sticker.img, sticker.pos.x, sticker.pos.y, sticker.size, sticker.size)
     })
 
-    // 3. Draw Lines
     meme.lines.forEach((line, idx) => {
         const { txt, size, color, pos } = line
         gCtx.fillStyle = color
@@ -170,37 +167,78 @@ function addListeners() {
     window.addEventListener('keydown', onMoveLine)
 }
 
+onDown
+JavaScript
+
 function onDown(ev) {
     const pos = getEvPos(ev)
     const meme = getMeme()
+
     const lineIdx = meme.lines.findIndex(line => {
         const textWidth = gCtx.measureText(line.txt).width
         return pos.x >= line.pos.x - textWidth / 2 &&
-            pos.x <= line.pos.x + textWidth / 2 &&
-            pos.y >= line.pos.y - line.size / 2 &&
-            pos.y <= line.pos.y + line.size / 2
+               pos.x <= line.pos.x + textWidth / 2 &&
+               pos.y >= line.pos.y - line.size / 2 &&
+               pos.y <= line.pos.y + line.size / 2
     })
 
     if (lineIdx !== -1) {
         setSelectedLine(lineIdx)
+        gSelectedSticker = null
+        isDragging = true
+        startPos = pos
+        document.body.style.cursor = 'grabbing'
+        renderMeme()
+        return
+    }
+
+    const clickedSticker = gStickers.findLast(sticker => {
+        return pos.x >= sticker.pos.x &&
+               pos.x <= sticker.pos.x + sticker.size &&
+               pos.y >= sticker.pos.y &&
+               pos.y <= sticker.pos.y + sticker.size
+    })
+
+    if (clickedSticker) {
+        gSelectedSticker = clickedSticker
+        setSelectedLine(-1)
         isDragging = true
         startPos = pos
         document.body.style.cursor = 'grabbing'
         renderMeme()
     }
 }
+// function onMove(ev) {
+//     if (!isDragging) return
+//     const pos = getEvPos(ev)
+//     const dx = pos.x - startPos.x
+//     const dy = pos.y - startPos.y
 
+//     moveLine(dx, dy)
+//     startPos = pos
+//     renderMeme()
+// }
 function onMove(ev) {
     if (!isDragging) return
     const pos = getEvPos(ev)
     const dx = pos.x - startPos.x
     const dy = pos.y - startPos.y
 
-    moveLine(dx, dy)
+    if (gSelectedSticker) {
+        gSelectedSticker.pos.x += dx
+        gSelectedSticker.pos.y += dy
+    } else {
+        const meme = getMeme()
+        const line = meme.lines[meme.selectedLineIdx]
+        if (line) {
+            line.pos.x += dx
+            line.pos.y += dy
+        }
+    }
+
     startPos = pos
     renderMeme()
 }
-
 function onUp() {
     isDragging = false
     document.body.style.cursor = 'default'
